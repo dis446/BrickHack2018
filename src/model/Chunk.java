@@ -1,5 +1,7 @@
 package model;
 
+import model.entities.Entity;
+
 import java.util.HashMap;
 import java.util.Map;
 

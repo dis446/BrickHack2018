@@ -1,5 +1,6 @@
-package model;
+package model.entities;
 
+import model.Vector;
 import model.entities.EntityType;
 
 public abstract class Entity {

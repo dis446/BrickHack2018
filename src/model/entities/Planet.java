@@ -1,11 +1,11 @@
 package model.entities;
 
-import model.Entity;
 import model.Equation;
+import model.Vector;
 
 public class Planet extends Entity {
 
-	public Planet(Equation equation) {
-		super(equation);
+	public Planet(){
+		super(new Vector(0,0),new Vector(0,0),"hi");
 	}
 }

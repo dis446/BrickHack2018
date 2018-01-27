@@ -1,11 +1,11 @@
 package model.entities;
 
-import model.Entity;
 import model.Equation;
+import model.Vector;
 
 public class Ship extends Entity {
 
-	public Ship(Equation equation) {
-		super(equation);
+	public Ship() {
+		super(new Vector(0,0),new Vector(0,0),"hi");
 	}
 }
