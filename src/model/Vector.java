@@ -51,4 +51,9 @@ public class Vector {
 		}
 		return new Vector(xResult, yResult);
 	}
+
+	@Override
+	public String toString() {
+		return "<"+x+" , "+y+">";
+	}
 }

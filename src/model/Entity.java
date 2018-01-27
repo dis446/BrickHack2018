@@ -1,18 +1,35 @@
 package model;
 
+import model.entities.EntityType;
+
 public abstract class Entity {
+
+	EntityType type = EntityType.NONE;
 	Vector position;
 	Vector velocity;
 	Vector curAcceleration;
+	String name;
 
-	public Entity(Vector position, Vector velocity){
+	public Entity(Vector position, Vector velocity, String name){
 		this.position = position;
 		this.velocity = velocity;
 		this.curAcceleration = new Vector(0,0);
+		this.name = name;
 	}
 
-	public Entity(Vector position){
-		this(position,new Vector(0,0));
+	public Entity(Vector position,String name){
+		this(position,new Vector(0,0),name);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public String toString() {
+		String out = "[\n"+type.getName()+": "+name+"\nPosition: "+position+"\n Velocity: "+velocity+"\n Acceleration: "
+				+curAcceleration+"\n]";
+		return out;
 	}
 
 	public Vector getPosition() {
