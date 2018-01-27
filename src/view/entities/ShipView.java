@@ -45,6 +45,11 @@ public class ShipView implements EntityView {
 		return this.color;
 	}
 
+	@Override
+	public boolean canMove() {
+		return baseShip.canMove();
+	}
+
 	public int getSize() {
 		return size;
 	}

@@ -47,4 +47,9 @@ public class PlanetView implements EntityView {
 	public Color getColor() {
 		return this.color;
 	}
+
+	@Override
+	public boolean canMove() {
+		return basePlanet.canMove();
+	}
 }

@@ -6,11 +6,13 @@ import model.entities.EntityType;
 import java.awt.*;
 
 public interface EntityView{
-	public EntityType getType();
+	EntityType getType();
 
-	public Vector getPosition();
+	Vector getPosition();
 
-	public Vector getVelocity();
+	Vector getVelocity();
 
-	public Color getColor();
+	Color getColor();
+
+	boolean canMove();
 }
