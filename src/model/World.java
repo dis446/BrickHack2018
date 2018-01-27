@@ -11,11 +11,11 @@ public class World {
 
 	Chunk[][] chunks;
 
-	public World(int length, int width){
-		this.chunks = new Chunk[length][width];
-		for (int i = 0; i < length; i++){
-			for (int j = 0; j < width; j++){
-				Chunk chunk = new Chunk(this,0,0);
+	public World(int rows, int cols){
+		this.chunks = new Chunk[rows][cols];
+		for (int i = 0; i < rows; i++){
+			for (int j = 0; j < cols; j++){
+				Chunk chunk = new Chunk(this,j*Chunk.side,i*Chunk.side);
 				chunks[i][j] = chunk;
 			}
 		}
@@ -26,5 +26,12 @@ public class World {
 	}
 
 	public void moved(Entity e){}
+
+	public void placeEntity(Entity e){
+		Vector pos = e.getPosition();
+		int i = (int)(pos.x/Chunk.side);
+		int j = (int)(pos.y/Chunk.side);
+		chunks[j][i].addEntity(e);
+	}
 
 }
