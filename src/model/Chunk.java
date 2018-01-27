@@ -12,10 +12,10 @@ public class Chunk {
 	private int y;
 
 	public Chunk(int x, int y){
-
-
 		this.x = x;
 		this.y = y;
 	}
+
+
 
 }
