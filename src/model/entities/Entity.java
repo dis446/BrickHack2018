@@ -33,6 +33,10 @@ public abstract class Entity {
 		return out;
 	}
 
+	public EntityType getType() {
+		return type;
+	}
+
 	public Vector getPosition() {
 		return position;
 	}

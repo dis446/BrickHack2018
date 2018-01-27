@@ -5,7 +5,7 @@ import model.Vector;
 
 public class Planet extends Entity {
 
-	public Planet(){
+	public Planet(Vector position, Vector velocity, String name, double mass){
 		super(new Vector(0,0),new Vector(0,0),"hi");
 	}
 }

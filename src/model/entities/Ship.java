@@ -5,7 +5,13 @@ import model.Vector;
 
 public class Ship extends Entity {
 
-	public Ship() {
-		super(new Vector(0,0),new Vector(0,0),"hi");
+	double angle;
+
+	public Ship(Vector position, Vector velocity, String name) {
+		super(position,velocity,name);
+		angle = 0;
+		type = EntityType.SHIP;
 	}
+
+
 }
