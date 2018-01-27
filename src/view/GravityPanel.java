@@ -7,6 +7,7 @@ public class GravityPanel extends Panel {
 
 	public GravityPanel(){
 		this.canvas = new Canvas();
+
 	}
 
 
