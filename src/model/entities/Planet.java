@@ -12,18 +12,28 @@ public class Planet extends Entity {
 	double radius;
 	boolean canMove;
 	int SOI; // Sphere of Gravitational influence in terms of chunks
+	Equation eq;
 
 	public Planet(Vector position, Vector velocity, String name, double mass,double radius){
 		super(position,velocity,name);
+		type = EntityType.PLANET;
 		this.mass = mass;
 		this.radius = radius;
 		canMove = true;
-		SOI = (int) Math.ceil(Math.sqrt(World.bigG*mass/minAcc)/ Chunk.side);
+		SOI = (int) Math.ceil(Math.sqrt(World.bigG*mass/minAcc)/ Chunk.side) + 1;
+		eq = (Vector pos) ->{
+			Vector dir = Vector.sub(position,pos);
+			double dis = dir.getLength();
+			dir = dir.getUnit();
+			return Vector.scalar(World.bigG*mass/(dis*dis),dir);
+		};
 	}
 
 	public double getRadius(){
 		return radius;
 	}
+
+	public boolean canMove(){return canMove;}
 
 	public double getMass() {
 		return mass;
@@ -34,11 +44,6 @@ public class Planet extends Entity {
 	}
 
 	public Equation getEq(){
-		return (Vector pos) ->{
-			Vector dir = Vector.sub(position,pos);
-			double dis = dir.getLength();
-			dir = dir.getUnit();
-			return Vector.scalar(World.bigG*mass/(dis*dis),dir);
-		};
+		return eq;
 	}
 }

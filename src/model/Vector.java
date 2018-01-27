@@ -11,6 +11,10 @@ public class Vector {
 		this.y = y;
 	}
 
+	public Vector(){
+		this(0,0);
+	}
+
 	public double getX() {
 		return x;
 	}
@@ -55,7 +59,7 @@ public class Vector {
 	 * @return
 	 */
 	public static Vector addVectors(Iterable<Vector> vectors) {
-		Vector result = new Vector(0,0);
+		Vector result = new Vector();
 		for (Vector vector : vectors) {
 			result.change(vector);
 		}

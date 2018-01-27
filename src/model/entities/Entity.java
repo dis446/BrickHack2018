@@ -11,6 +11,7 @@ public abstract class Entity {
 	Vector curAcceleration;
 	String name;
 
+
 	public Entity(Vector position, Vector velocity, String name){
 		this.position = position;
 		this.velocity = velocity;
@@ -44,6 +45,9 @@ public abstract class Entity {
 	public Vector getVelocity() {
 		return velocity;
 	}
+
+
+	public boolean canMove(){return true;}
 
 	public void applyAcc(Vector acc){
 		curAcceleration = acc;
