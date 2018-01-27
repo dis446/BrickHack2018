@@ -19,6 +19,19 @@ public class Vector {
 		return y;
 	}
 
+	public void change(Vector delta){
+		x+= delta.x;
+		y+= delta.y;
+	}
+
+	public static Vector scalar(double scalar, Vector v){
+		return new Vector(v.x*scalar,v.y*scalar);
+	}
+
+	public static double dotProduct(Vector v1, Vector v2){
+		return v1.getX()*v2.getX() + v1.getY()*v2.getY();
+	}
+
 	public double getLength(){
 		//Pythagoras
 		return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
