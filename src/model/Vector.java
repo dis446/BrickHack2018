@@ -29,7 +29,7 @@ public class Vector {
 	 * @param vectors
 	 * @return
 	 */
-	public Vector addVectors(Iterable<Vector> vectors) {
+	public static Vector addVectors(Iterable<Vector> vectors) {
 		double xResult = 0;
 		double yResult = 0;
 		for (Vector vector : vectors) {

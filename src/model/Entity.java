@@ -5,7 +5,6 @@ public abstract class Entity {
 
 	public Entity(Equation equation){
 		this.equation = equation;
-		equation.setEntity(this);
 	}
 
 
