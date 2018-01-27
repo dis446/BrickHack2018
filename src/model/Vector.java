@@ -24,6 +24,18 @@ public class Vector {
 		y+= delta.y;
 	}
 
+	public static Vector add(Vector v1,Vector v2){
+		return new Vector(v1.x+v2.x,v1.y+v2.y);
+	}
+
+	public static Vector sub(Vector v1,Vector v2){
+		return new Vector(v1.x-v2.x,v1.y-v2.y);
+	}
+
+	public Vector getUnit(){
+		return scalar(1/getLength(),this);
+	}
+
 	public static Vector scalar(double scalar, Vector v){
 		return new Vector(v.x*scalar,v.y*scalar);
 	}
@@ -43,13 +55,11 @@ public class Vector {
 	 * @return
 	 */
 	public static Vector addVectors(Iterable<Vector> vectors) {
-		double xResult = 0;
-		double yResult = 0;
+		Vector result = new Vector(0,0);
 		for (Vector vector : vectors) {
-			xResult += vector.getX();
-			yResult += vector.getY();
+			result.change(vector);
 		}
-		return new Vector(xResult, yResult);
+		return result;
 	}
 
 	@Override
