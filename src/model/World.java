@@ -15,4 +15,8 @@ public class World {
 		}
 	}
 
+	public Chunk getChunk(int row, int col){
+		return chunks[row][col];
+	}
+
 }
