@@ -43,14 +43,22 @@ public class Chunk {
 		planetInfluences.remove(p);
 	}
 
+	public boolean inBound(Entity e){
+		Vector pos = e.getPosition();
+		return (pos.getX()>= xPos && pos.getY()>= yPos && pos.getX()<xPos+side && pos.getY()<yPos+side);
+	}
+
 	public void step(int baseTime){
 		for(Entity e: entities){
 			Vector acc = new Vector();
 			Vector pos = e.getPosition();
 			for(Planet p: planetInfluences){
 				acc.change(p.getEq().evaluate(pos));
-				e.applyAcc(acc);
-				e.step((Instant.now().getNano()- baseTime)/1e9);
+			}
+			e.applyAcc(acc);
+			e.step((Instant.now().getNano()- baseTime)/1e9);
+			if(!inBound(e)){
+				world.moved(e);
 			}
 		}
 	}
