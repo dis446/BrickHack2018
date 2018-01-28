@@ -2,7 +2,6 @@ package model.entities;
 
 import model.Color;
 import model.Vector;
-import model.entities.EntityType;
 
 public abstract class Entity {
 
@@ -19,6 +18,7 @@ public abstract class Entity {
 		this.velocity = velocity;
 		this.curAcceleration = new Vector(0,0);
 		this.name = name;
+		this.color = Color.RED;
 	}
 
 	public Entity(Vector position,String name){

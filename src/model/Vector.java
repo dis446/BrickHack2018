@@ -3,6 +3,11 @@ package model;
 import java.util.Iterator;
 
 public class Vector {
+
+	public static Vector nullVector(){
+		return new Vector(0,0);
+	}
+
 	double x;
 	double y;
 

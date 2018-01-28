@@ -1,9 +1,12 @@
 package model;
 
 
+import javafx.beans.InvalidationListener;
 import model.entities.Entity;
 
-public class World {
+import java.util.Observable;
+
+public class World extends Observable{
 
 	public static final double bigG = 6.67408e-11;
 	public static final double lengthUnit = 1e7;
@@ -33,5 +36,4 @@ public class World {
 		int j = (int)(pos.y/Chunk.side);
 		chunks[j][i].addEntity(e);
 	}
-
 }

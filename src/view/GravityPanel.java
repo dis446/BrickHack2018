@@ -44,8 +44,8 @@ public class GravityPanel extends JPanel {
 		}
 	}
 
-	public void update(Iterable<Entity> entityViews){
-		this.entities = entityViews;
+	public void update(Iterable<Entity> entities){
+		this.entities = entities;
 		super.repaint();
 	}
 

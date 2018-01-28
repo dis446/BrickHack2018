@@ -1,11 +1,15 @@
 package view;
 
 import model.World;
+import model.entities.Entity;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
-public class GravityUI extends JFrame {
+public class GravityUI extends JFrame implements Observer{
 
 	public static final int xDimension = 500;
 	public static final int yDimension = 500;
@@ -14,7 +18,7 @@ public class GravityUI extends JFrame {
 	World world;
 	GravityPanel panel;
 
-	public GravityUI(World world) {
+	public GravityUI(World world){
 		this.world = world;
 		this.setTitle("Gravity Bong Simulation");
 		this.panel = new GravityPanel();
@@ -23,7 +27,17 @@ public class GravityUI extends JFrame {
 		setVisible(true);
 	}
 
+	public void drawAll(Iterable<Entity> entities){
+		panel.update(entities);
+	}
+
 	public static void main(String args[]){
 		new GravityUI(new World(5, 5));
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		this.world = (World) o;
+		drawAll((Iterable<Entity>) arg);
 	}
 }
