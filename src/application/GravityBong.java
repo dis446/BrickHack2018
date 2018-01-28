@@ -1,7 +1,6 @@
 package application;
 
-import model.Chunk;
-import model.Color;
+import model.Texture;
 import model.Vector;
 import model.World;
 import model.entities.Entity;
@@ -29,7 +28,7 @@ public class GravityBong {
 
 	private void run() {
 		this.world.addObserver(gui);
-		this.gui.drawAll(this.world.getEntities());
+		this.gui.update(this.world, this.world.getEntities());
 	}
 
 	private void readFromFile(String fileName){
@@ -49,7 +48,7 @@ public class GravityBong {
 				}
 				double positionX, positionY, velocityX, velocityY;
 				String name;
-				Color color;
+				Texture color;
 
 				positionX = Double.parseDouble(data[1]);
 				positionY = Double.parseDouble(data[2]);
@@ -58,7 +57,7 @@ public class GravityBong {
 				velocityY = Double.parseDouble(data[4]);
 				Vector velocity = new Vector(velocityX, velocityY);
 				name = data[5];
-				color = Color.parseColor(data[6]);
+				color = Texture.parseColor(data[6]);
 
 				if (data[0].equals("p")){
 					//Planet
@@ -74,7 +73,6 @@ public class GravityBong {
 				}
 			}
 			this.world = new World(rows, cols);
-			this.world.clearEntities();
 			this.world.addEntities(entities);
 		} catch (IOException e) {
 			e.printStackTrace();

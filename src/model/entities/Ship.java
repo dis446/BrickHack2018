@@ -1,13 +1,13 @@
 package model.entities;
 
-import model.Color;
+import model.Texture;
 import model.Vector;
 
 public class Ship extends Entity {
 
 	double angle;
 
-	public Ship(Vector position, Vector velocity, String name, Color color) {
+	public Ship(Vector position, Vector velocity, String name, Texture color) {
 		super(position,velocity,name, color);
 		angle = 0;
 		type = EntityType.SHIP;

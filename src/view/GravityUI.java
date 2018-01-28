@@ -24,7 +24,7 @@ public class GravityUI extends JFrame implements Observer{
 		setVisible(true);
 	}
 
-	public void drawAll(Iterable<Entity> entities){
+	private void drawAll(Iterable<Entity> entities){
 		panel.update(entities);
 	}
 

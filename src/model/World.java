@@ -54,10 +54,6 @@ public class World extends Observable{
 		}
 	}
 
-	public void clearEntities(){
-		this.entities = new HashSet<>();
-	}
-
 	public Chunk getChunk(int row, int col){
 		return chunks[row][col];
 	}

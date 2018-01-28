@@ -1,5 +1,7 @@
 package view;
 
+import model.Texture;
+
 import java.awt.*;
 
 public class ViewColor {
@@ -9,7 +11,7 @@ public class ViewColor {
 	public static Color WHITE = Color.white;
 	public static Color ORANGE = Color.orange;
 
-	public static Color modelToAWTColor(model.Color color){
+	public static Color modelToAWTColor(Texture color){
 		switch (color){
 			case BLACK:
 				return BLACK;

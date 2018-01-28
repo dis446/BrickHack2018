@@ -11,7 +11,7 @@ public class Planet extends Entity {
 	int SOI; // Sphere of Gravitational influence in terms of chunks
 	Equation eq;
 
-	public Planet(Vector position, Vector velocity, String name, double mass, double radius, Color color){
+	public Planet(Vector position, Vector velocity, String name, double mass, double radius, Texture color){
 		super(position,velocity,name, color);
 		type = EntityType.PLANET;
 		this.mass = mass;

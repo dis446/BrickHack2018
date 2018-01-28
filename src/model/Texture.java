@@ -1,11 +1,11 @@
 package model;
 
-public enum Color {
+public enum Texture {
 	BLACK("BLACK") , RED("RED"), WHITE("WHITE"), BLUE("BLUE"), ORANGE("ORANGE");
 
 	private String label;
 
-	Color(String label) {
+	Texture(String label) {
 		this.label = label;
 	}
 
@@ -13,7 +13,7 @@ public enum Color {
 		return label;
 	}
 
-	public static Color parseColor(String s){
+	public static Texture parseColor(String s){
 		switch (s){
 			case "BLACK":
 				return BLACK;

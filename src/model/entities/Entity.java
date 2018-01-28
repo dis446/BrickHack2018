@@ -1,6 +1,6 @@
 package model.entities;
 
-import model.Color;
+import model.Texture;
 import model.Vector;
 
 public abstract class Entity {
@@ -10,10 +10,10 @@ public abstract class Entity {
 	Vector velocity;
 	Vector curAcceleration;
 	String name;
-	Color color;
+	Texture color;
 
 
-	public Entity(Vector position, Vector velocity, String name, Color color){
+	public Entity(Vector position, Vector velocity, String name, Texture color){
 		this.position = position;
 		this.velocity = velocity;
 		this.curAcceleration = new Vector(0,0);
@@ -21,7 +21,7 @@ public abstract class Entity {
 		this.color = color;
 	}
 
-	public Entity(Vector position,String name, Color color){
+	public Entity(Vector position,String name, Texture color){
 		this(position,new Vector(0,0),name,color);
 	}
 
@@ -48,7 +48,7 @@ public abstract class Entity {
 		return velocity;
 	}
 
-	public Color getColor() { return color; }
+	public Texture getColor() { return color; }
 
 	public boolean canMove(){return true;}
 
