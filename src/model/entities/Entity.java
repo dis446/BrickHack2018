@@ -31,8 +31,8 @@ public abstract class Entity {
 
 	@Override
 	public String toString() {
-		String out = "[\n"+type.getName()+": "+name+"\nPosition: "+position+"\n Velocity: "+velocity+"\n Acceleration: "
-				+curAcceleration+"\n]";
+		String out = "["+type.getName()+": "+name+" Position: "+position+" Velocity: "+velocity+" Acceleration: "
+				+curAcceleration+"]";
 		return out;
 	}
 
@@ -58,7 +58,7 @@ public abstract class Entity {
 
 	public void step(double timeStep){
 		velocity.change(Vector.scalar(timeStep,curAcceleration));
-		position.change(velocity);
+		position.change(Vector.scalar(timeStep, velocity));
 	}
 
 	public abstract String toFileFormat();

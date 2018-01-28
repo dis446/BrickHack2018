@@ -49,18 +49,32 @@ public class Chunk extends Observable{
 	}
 
 	public void step(long baseTime, long newTime){
-		for(Entity e: entities) {
+		Set<Entity> copy = new HashSet<>(entities);
+		for(Entity e: copy) {
 			Vector acc = new Vector();
 			Vector pos = e.getPosition();
 			for (Planet p : planetInfluences) {
-				acc.change(p.getEq().evaluate(pos));
+				if (!p.equals(e)) {
+					acc.change(p.getEq().evaluate(pos));
+
+				}
 			}
 			e.applyAcc(acc);
-			e.step((Math.min((newTime - baseTime), World.tickTime) / 1e6));
+			e.step((Math.min((newTime - baseTime), World.tickTime) / 1e3));
 			if (!inBound(e)) {
 				entities.remove(e);
 				world.moved(e);
 			}
 		}
+	}
+
+	@Override
+	public String toString() {
+		String out = "[ "+ new Vector(xPos,yPos)+"\n";
+		for(Entity e:entities){
+			out+= e+"\n";
+		}
+		out+="]";
+		return out;
 	}
 }

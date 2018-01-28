@@ -1,8 +1,8 @@
 package model.entities;
 
 public enum EntityType {
-	SHIP("ShipView"),
-	PLANET("PlanetView"),
+	SHIP("Ship"),
+	PLANET("Planet"),
 	NONE("None");
 
 	String name;

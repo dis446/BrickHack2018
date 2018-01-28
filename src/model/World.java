@@ -3,6 +3,7 @@ package model;
 
 import model.entities.Entity;
 import model.entities.Planet;
+import model.entities.Ship;
 
 import java.time.Instant;
 import java.util.*;
@@ -10,8 +11,9 @@ import java.util.*;
 public class World extends Observable{
 
 	public static final double bigG = 6.67408e-11;
-	public static final double lengthUnit = 1e7;
-	public static final double timeUnit = 1;
+	public static final long lengthUnit = (long) 1e7;
+	public static final long timeUnit = (long) 1;
+	public static final long massUnit = (long) 1e9;
 	public static final long tickTime = 50;
 
 	Chunk[][] chunks;
@@ -108,14 +110,29 @@ public class World extends Observable{
 		todo.add(new Vector(row,col));
 		while(!todo.isEmpty()){
 			Vector v = todo.poll();
-			if(done.contains(v)){continue;}
+			if(done.contains(v) || !inBounds(v)){
+				continue;
+			}
 			int diff = (int) (Math.abs(v.x-row)+Math.abs(v.y-col));
 			chunks[(int)v.x][(int)v.y].removeInfluence(p);
 			if(diff<=radius) {
-				todo.add(Vector.add(v, new Vector(0, 1)));
-				todo.add(Vector.add(v, new Vector(0, -1)));
-				todo.add(Vector.add(v, new Vector(1, 0)));
-				todo.add(Vector.add(v, new Vector(-1, 0)));
+				Vector up = Vector.add(v, new Vector(0, 1));
+				if(!done.contains(up) && inBounds(up)) {
+					todo.add(up);
+				}
+				Vector down = Vector.add(v, new Vector(0, -1));
+				if(!done.contains(down) && inBounds(down)) {
+					todo.add(down);
+				}
+				Vector left = Vector.add(v, new Vector(1, 0));
+				if(!done.contains(left) && inBounds(left)) {
+					todo.add(up);
+				}
+				Vector right = Vector.add(v, new Vector(-1, 0));
+				if(!done.contains(right) && inBounds(right)) {
+					todo.add(right);
+				}
+				done.add(v);
 			}
 		}
 
@@ -130,19 +147,41 @@ public class World extends Observable{
 		todo.add(new Vector(row,col));
 		while(!todo.isEmpty()){
 			Vector v = todo.poll();
-			if(done.contains(v) || v.x<0 || v.x>=rows || v.y<0 || v.y>=cols){
+			if(done.contains(v) || !inBounds(v)){
 				continue;
 			}
 			int diff = (int) (Math.abs(v.x-row)+Math.abs(v.y-col));
 			chunks[(int)v.x][(int)v.y].addInfluence(p);
 			if(diff<=radius) {
-				todo.add(Vector.add(v, new Vector(0, 1)));
-				todo.add(Vector.add(v, new Vector(0, -1)));
-				todo.add(Vector.add(v, new Vector(1, 0)));
-				todo.add(Vector.add(v, new Vector(-1, 0)));
+				Vector up = Vector.add(v, new Vector(0, 1));
+				if(!done.contains(up) && inBounds(up)) {
+					todo.add(up);
+				}
+				Vector down = Vector.add(v, new Vector(0, -1));
+				if(!done.contains(down) && inBounds(down)) {
+					todo.add(down);
+				}
+				Vector left = Vector.add(v, new Vector(1, 0));
+				if(!done.contains(left) && inBounds(left)) {
+					todo.add(up);
+				}
+				Vector right = Vector.add(v, new Vector(-1, 0));
+				if(!done.contains(right) && inBounds(right)) {
+					todo.add(right);
+				}
+				done.add(v);
 			}
 		}
 
+	}
+
+	/**
+	 * Checks if this <row,col> vector is in bounds
+	 * @param v
+	 * @return
+	 */
+	public boolean inBounds(Vector v){
+		return v.x>=0 && v.y>=0 && v.x<cols && v.y<rows;
 	}
 
 	public void placeEntity(Entity e){
@@ -171,6 +210,37 @@ public class World extends Observable{
 			nextTime = Instant.now().toEpochMilli();
 			step();
 			baseTime = nextTime;
+		}
+	}
+
+	@Override
+	public String toString() {
+		String out = "World:\n";
+		for(int i = 0; i<rows;i++){
+			for(int j = 0; j<cols;j++){
+				out+="==========================\n";
+				out+=chunks[i][j]+"\n";
+				out+="==========================\n";
+
+			}
+		}
+		return out;
+	}
+
+	public static void main(String[] args){
+		World world = new World(2,2);
+		world.baseTime = 0;
+		world.nextTime = 50;
+		//world.addEntity(new Ship(new Vector(990,990),new Vector(1000,0),"bbygurl",Color.RED));
+		world.addEntity(new Planet(new Vector(1500,1500),new Vector(),"kepler",50000000,3,Color.RED));
+		world.addEntity(new Planet(new Vector(500,500),new Vector(),"kepler2",50000000,3,Color.RED));
+
+		int i = 0;
+		System.out.println(world);
+		while(i<10){
+			world.step();
+			System.out.println(world);
+			i++;
 		}
 	}
 }
