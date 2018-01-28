@@ -31,8 +31,8 @@ public class World extends Observable{
 		this.chunks = new Chunk[rows][cols];
 		this.rows = rows;
 		this.cols = cols;
-		maxX = rows * Chunk.side;
-		maxY = cols * Chunk.side;
+		maxX = cols * Chunk.side;
+		maxY = rows * Chunk.side;
 		entities = new HashSet<>();
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
@@ -83,11 +83,11 @@ public class World extends Observable{
 		}
 		if(pos.getY()<0){
 			pos.setY(0);
-			vel.setY(-vel.getX());
+			vel.setY(-vel.getY());
 		}
 		if(pos.getY()>=maxY){
 			pos.setY(maxY-1);
-			vel.setY(-vel.getX());
+			vel.setY(-vel.getY());
 		}
 
 		if(e instanceof Planet){
@@ -147,7 +147,7 @@ public class World extends Observable{
 				continue;
 			}
 			int diff = (int) (Math.abs(v.x-row)+Math.abs(v.y-col));
-			chunks[(int)v.x][(int)v.y].addInfluence(p);
+			chunks[(int)v.y][(int)v.x].addInfluence(p);
 			if(diff<=radius) {
 				Vector up = Vector.add(v, new Vector(0, 1));
 				if(!done.contains(up) && inBounds(up)) {
@@ -199,6 +199,14 @@ public class World extends Observable{
 		}
 		setChanged();
 		notifyObservers(entities);
+	}
+
+	public double getMaxX() {
+		return maxX;
+	}
+
+	public double getMaxY() {
+		return maxY;
 	}
 
 	public void run(){

@@ -7,7 +7,7 @@ import java.time.Instant;
 import java.util.*;
 
 public class Chunk extends Observable{
-	public static final double side = 1000; //10,000km
+	public static final double side = 5000; //10,000km
 
 	Set<Entity> entities;
 	Set<Planet> planetInfluences;

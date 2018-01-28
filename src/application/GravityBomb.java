@@ -10,6 +10,7 @@ import view.GravityUI;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GravityBomb {
 
@@ -25,6 +26,10 @@ public class GravityBomb {
 		readFromFile(fileName);
 		this.gui = new GravityUI(this.world);
 	}
+	public GravityBomb(World world){
+	    this.world = world;
+	    this.gui = new GravityUI(this.world);
+    }
 
 	private void run() {
 		this.world.run();
@@ -93,6 +98,21 @@ public class GravityBomb {
 
 	}
 
+	public static World randomized(){
+        World world = new World(7,16);
+        //world.addEntity(new Ship(new Vector(990,990),new Vector(1000,0),"bbygurl",Color.RED));
+        int count = 500;
+        double maxX = world.getMaxX();
+        double maxY = world.getMaxY();
+        Random random = new Random();
+        while(count>0){
+            world.addEntity(new Planet(new Vector(random.nextDouble()*maxX,random.nextDouble()*maxY),new Vector(),"kepler",random.nextLong()%30000000+10000000,100,Texture.RED));
+            //world.addEntity(new Ship(new Vector(random.nextDouble()*maxX,random.nextDouble()*maxY),new Vector(),"kepler",Texture.RED));
+            count--;
+        }
+        return world;
+    }
+
 	public static void main(String[] args){
 		GravityBomb gravityBomb = null;
 		if (args.length == 1){
@@ -103,8 +123,7 @@ public class GravityBomb {
 			int width = Integer.parseInt(args[1]);
 			gravityBomb = new GravityBomb(length, width);
 		}else{
-			System.out.println("Error. Usage: java GravityBomb length width or java GravityBomb fileName");
-			System.exit(0);
+			gravityBomb = new GravityBomb(randomized());
 		}
 		gravityBomb.run();
 	}
