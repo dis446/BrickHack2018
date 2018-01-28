@@ -9,7 +9,7 @@ public class ViewColor {
 	static Color RED = Color.red;
 	static Color BLUE = Color.blue;
 	static Color WHITE = Color.white;
-	static Color GREEN = Color.orange;
+	static Color GREEN = Color.green;
 	static Color ORANGE = Color.orange;
 
 
