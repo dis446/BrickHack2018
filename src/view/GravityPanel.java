@@ -12,6 +12,7 @@ public class GravityPanel extends JPanel {
 	private Iterable<Entity> entities;
 
 	public GravityPanel(){
+		this.setBackground(Color.BLACK);
 		this.setVisible(true);
 	}
 
@@ -28,7 +29,7 @@ public class GravityPanel extends JPanel {
 					int size = ship.getSize();
 					startX = (int) (startPos.getX() - size);
 					startY = (int) (startPos.getY() - size);
-					g2.draw(new Rectangle(startX, startY, size, size));
+					g2.fillRect(startX, startY, size, size);
 					break;
 				case PLANET:
 					Planet planet= (Planet) entity;

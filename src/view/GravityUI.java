@@ -4,15 +4,13 @@ import model.World;
 import model.entities.Entity;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 public class GravityUI extends JFrame implements Observer{
 
-	public static final int xDimension = 500;
-	public static final int yDimension = 500;
+	public static final int xDimension = 1000;
+	public static final int yDimension = 1000;
 
 
 	World world;

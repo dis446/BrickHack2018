@@ -1,7 +1,6 @@
 package model;
 
 
-import javafx.beans.InvalidationListener;
 import model.entities.Entity;
 
 import java.util.Observable;
