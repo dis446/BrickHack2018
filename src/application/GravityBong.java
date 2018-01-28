@@ -9,10 +9,7 @@ import model.entities.Planet;
 import model.entities.Ship;
 import view.GravityUI;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class GravityBong {
@@ -27,11 +24,16 @@ public class GravityBong {
 		GravityUI ui = new GravityUI(world);
 	}
 
-	private Iterable<Entity> readFromFile(String fileName){
+	private void readFromFile(String fileName){
 		ArrayList<Entity> entities = new ArrayList<>();
+		int rows, cols;
 		try {
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(fileName)));
 			String line;
+			line = bufferedReader.readLine();
+			String[] rowCol = line.split(",");
+			rows = Integer.parseInt(rowCol[0]);
+			cols = Integer.parseInt(rowCol[1]);
 			while ((line = bufferedReader.readLine()) != null) {
 				String[] data = line.split(",");
 				if (data.length < 8){
@@ -63,10 +65,26 @@ public class GravityBong {
 					entities.add(new Ship(position, velocity, name));
 				}
 			}
+			this.world = new World(rows, cols);
+			this.world.addEntities(entities);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return entities;
+	}
+
+	public void saveWorld(World world, String fileName){
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, false));
+			writer.write(world.getNumRows() + "," + world.getNumCols());
+			writer.newLine();
+			for (Entity entity: world.getEntities()){
+				writer.write(entity.toFileFormat());
+				writer.newLine();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public static void main(String[] args){
