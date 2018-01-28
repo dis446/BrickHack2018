@@ -45,22 +45,22 @@ public class Chunk extends Observable{
 
 	public boolean inBound(Entity e){
 		Vector pos = e.getPosition();
-		return (pos.getX()>= xPos && pos.getY()>= yPos && pos.getX()<xPos+side && pos.getY()<yPos+side);
+		return (pos.getX()>= xPos && pos.getY()>= yPos && pos.getX()<=xPos+side && pos.getY()<=yPos+side);
 	}
 
-	public Iterable<Entity> step(long baseTime, long newTime){
-		for(Entity e: entities){
+	public void step(long baseTime, long newTime){
+		for(Entity e: entities) {
 			Vector acc = new Vector();
 			Vector pos = e.getPosition();
-			for(Planet p: planetInfluences){
+			for (Planet p : planetInfluences) {
 				acc.change(p.getEq().evaluate(pos));
 			}
 			e.applyAcc(acc);
-			e.step((Math.min((newTime - baseTime),World.tickTime)/1e6));
-			if(!inBound(e)){
+			e.step((Math.min((newTime - baseTime), World.tickTime) / 1e6));
+			if (!inBound(e)) {
+				entities.remove(e);
 				world.moved(e);
 			}
 		}
-		return entities;
 	}
 }
