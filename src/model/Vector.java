@@ -45,6 +45,10 @@ public class Vector {
 	}
 
 	public Vector getUnit(){
+		double length = getLength();
+		if(length == 0){
+			return new Vector();
+		}
 		return scalar(1/getLength(),this);
 	}
 

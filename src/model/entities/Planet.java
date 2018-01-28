@@ -21,6 +21,9 @@ public class Planet extends Entity {
 		eq = (Vector pos) ->{
 			Vector dir = Vector.sub(position,pos);
 			double dis = dir.getLength();
+			if(dis == 0){
+				return new Vector();
+			}
 			dir = dir.getUnit();
 			return Vector.scalar(World.bigG*mass*World.massUnit/(dis*dis),dir);
 		};

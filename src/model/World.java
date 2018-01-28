@@ -225,11 +225,11 @@ public class World extends Observable{
 
 	public static void main(String[] args){
 	    ///Current config is when my computer reaches ~20 ticks/s
-		World world = new World(50,50);
+		World world = new World(5,5);
 		world.baseTime = 0;
 		world.nextTime = 50;
 		//world.addEntity(new Ship(new Vector(990,990),new Vector(1000,0),"bbygurl",Color.RED));
-        int count = 690;
+        int count = 300;
         Random random = new Random();
         while(count>0){
             world.addEntity(new Planet(new Vector(random.nextDouble()%world.maxX,random.nextDouble()%world.maxY),new Vector(),"kepler",random.nextLong()%300000+100000,3,Texture.RED));
@@ -249,7 +249,7 @@ public class World extends Observable{
 			//System.out.println(world);
 			i++;
 		}
-		//System.out.println(world);
+		System.out.println(world);
 		System.out.println(i);
 	}
 }
