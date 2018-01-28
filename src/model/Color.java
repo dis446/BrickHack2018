@@ -1,7 +1,7 @@
 package model;
 
 public enum Color {
-	BLACK("black") , RED("red");
+	BLACK("BLACK") , RED("RED"), WHITE("WHITE"), BLUE("BLUE"), ORANGE("ORANGE");
 
 	private String label;
 
@@ -15,10 +15,16 @@ public enum Color {
 
 	public static Color parseColor(String s){
 		switch (s){
-			case "black":
+			case "BLACK":
 				return BLACK;
-			case "red":
+			case "RED":
 				return RED;
+			case "WHITE":
+				return WHITE;
+			case "BLUE":
+				return BLUE;
+			case "ORANGE":
+				return ORANGE;
 		}
 		throw new IllegalStateException("Error. Unknown color: " + s);
 	}

@@ -7,7 +7,7 @@ import model.entities.Planet;
 import java.time.Instant;
 import java.util.*;
 
-public class World extends Observable implements Observer{
+public class World extends Observable{
 
 	public static final double bigG = 6.67408e-11;
 	public static final double lengthUnit = 1e7;
@@ -25,16 +25,16 @@ public class World extends Observable implements Observer{
 	int rows;
 	int cols;
 
-	public World(int rows, int cols){
+	public World(int rows, int cols) {
 		this.chunks = new Chunk[rows][cols];
 		this.rows = rows;
 		this.cols = cols;
-		maxX = rows*Chunk.side;
-		maxY = cols*Chunk.side;
+		maxX = rows * Chunk.side;
+		maxY = cols * Chunk.side;
 		entities = new HashSet<>();
-		for (int i = 0; i < rows; i++){
-			for (int j = 0; j < cols; j++){
-				Chunk chunk = new Chunk(this,j*Chunk.side,i*Chunk.side);
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
+				Chunk chunk = new Chunk(this, j * Chunk.side, i * Chunk.side);
 				chunks[i][j] = chunk;
 			}
 		}
@@ -50,6 +50,10 @@ public class World extends Observable implements Observer{
 		for(Entity e: es){
 			addEntity(e);
 		}
+	}
+
+	public void clearEntities(){
+		this.entities = new HashSet<>();
 	}
 
 	public Chunk getChunk(int row, int col){
@@ -168,10 +172,5 @@ public class World extends Observable implements Observer{
 			step();
 			baseTime = nextTime;
 		}
-	}
-
-	@Override
-	public void update(Observable observable, Object o) {
-		notifyObservers((Iterable<Entity>) o);
 	}
 }

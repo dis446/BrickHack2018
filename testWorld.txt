@@ -1,0 +1,4 @@
+5,5
+p,50,50,50,50,Adrian,ORANGE,10,25,True
+s,300,300,50,50,Disney,ORANGE,50
+p,500,500,50,50,Saad,ORANGE,40,40,True

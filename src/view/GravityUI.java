@@ -12,7 +12,6 @@ public class GravityUI extends JFrame implements Observer{
 	public static final int xDimension = 1000;
 	public static final int yDimension = 1000;
 
-
 	World world;
 	GravityPanel panel;
 

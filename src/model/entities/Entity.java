@@ -13,16 +13,16 @@ public abstract class Entity {
 	Color color;
 
 
-	public Entity(Vector position, Vector velocity, String name){
+	public Entity(Vector position, Vector velocity, String name, Color color){
 		this.position = position;
 		this.velocity = velocity;
 		this.curAcceleration = new Vector(0,0);
 		this.name = name;
-		this.color = Color.RED;
+		this.color = color;
 	}
 
-	public Entity(Vector position,String name){
-		this(position,new Vector(0,0),name);
+	public Entity(Vector position,String name, Color color){
+		this(position,new Vector(0,0),name,color);
 	}
 
 	public String getName() {

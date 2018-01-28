@@ -15,13 +15,21 @@ import java.util.ArrayList;
 public class GravityBong {
 
 	World world;
+	GravityUI gui;
 
 	public GravityBong(int length, int column) {
 		this.world = new World(length, column);
+		this.gui = new GravityUI(world);
+	}
+
+	public GravityBong(String fileName) {
+		readFromFile(fileName);
+		this.gui = new GravityUI(this.world);
 	}
 
 	private void run() {
-		GravityUI ui = new GravityUI(world);
+		this.world.addObserver(gui);
+		this.gui.drawAll(this.world.getEntities());
 	}
 
 	private void readFromFile(String fileName){
@@ -59,13 +67,14 @@ public class GravityBong {
 					mass = Double.parseDouble(data[7]);
 					radius = Double.parseDouble(data[8]);
 					canMove = Boolean.parseBoolean(data[9]); // We'll use this later
-					entities.add(new Planet(position, velocity, name, mass, radius));
+					entities.add(new Planet(position, velocity, name, mass, radius, color));
 				}
 				else{
-					entities.add(new Ship(position, velocity, name));
+					entities.add(new Ship(position, velocity, name, color));
 				}
 			}
 			this.world = new World(rows, cols);
+			this.world.clearEntities();
 			this.world.addEntities(entities);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -88,13 +97,18 @@ public class GravityBong {
 	}
 
 	public static void main(String[] args){
-		if (args.length != 2){
-			System.out.println("Error. Usage: java GravityBong length width");
+		GravityBong gravityBong = null;
+		if (args.length == 1){
+			String fileName = args[0];
+			gravityBong = new GravityBong(fileName);
+		} else if (args.length == 2){
+			int length = Integer.parseInt(args[0]);
+			int width = Integer.parseInt(args[1]);
+			gravityBong = new GravityBong(length, width);
+		}else{
+			System.out.println("Error. Usage: java GravityBong length width or java GravityBong fileName");
 			System.exit(0);
 		}
-		int length = Integer.parseInt(args[0]);
-		int column = Integer.parseInt(args[1]);
-		GravityBong gravityBong = new GravityBong(length, column);
 		gravityBong.run();
 	}
 }

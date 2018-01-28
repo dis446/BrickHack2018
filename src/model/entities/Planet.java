@@ -1,9 +1,6 @@
 package model.entities;
 
-import model.Chunk;
-import model.Equation;
-import model.Vector;
-import model.World;
+import model.*;
 
 public class Planet extends Entity {
 	public static double minAcc = .05; //Minimum acceleration (m/s^2) considered significant
@@ -14,8 +11,8 @@ public class Planet extends Entity {
 	int SOI; // Sphere of Gravitational influence in terms of chunks
 	Equation eq;
 
-	public Planet(Vector position, Vector velocity, String name, double mass,double radius){
-		super(position,velocity,name);
+	public Planet(Vector position, Vector velocity, String name, double mass, double radius, Color color){
+		super(position,velocity,name, color);
 		type = EntityType.PLANET;
 		this.mass = mass;
 		this.radius = radius;

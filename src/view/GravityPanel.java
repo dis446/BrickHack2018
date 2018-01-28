@@ -30,6 +30,7 @@ public class GravityPanel extends JPanel {
 					startX = (int) (startPos.getX() - size);
 					startY = (int) (startPos.getY() - size);
 					g2.fillRect(startX, startY, size, size);
+					g2.setColor(ViewColor.modelToAWTColor(entity.getColor()));
 					break;
 				case PLANET:
 					Planet planet= (Planet) entity;
@@ -37,11 +38,11 @@ public class GravityPanel extends JPanel {
 					startX = (int) (startPos.getX() - radius);
 					startY = (int) (startPos.getY() - radius);
 					g2.fillOval(startX, startY, radius * 2, radius * 2);
+					g2.setColor(ViewColor.modelToAWTColor(entity.getColor()));
 					break;
 				case NONE:
 					break;
 			}
-			g2.setColor(ViewColor.modelToAWTColor(entity.getColor()));
 		}
 	}
 
