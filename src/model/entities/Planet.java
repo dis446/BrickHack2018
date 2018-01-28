@@ -17,7 +17,7 @@ public class Planet extends Entity {
 		this.mass = mass;
 		this.radius = radius;
 		canMove = true;
-		SOI = (int) Math.ceil(Math.sqrt(World.bigG*mass/minAcc)/ Chunk.side) + 1;
+		SOI = (int) Math.ceil(Math.sqrt(World.bigG*mass*World.massUnit/minAcc)/ Chunk.side) + 1;
 		eq = (Vector pos) ->{
 			Vector dir = Vector.sub(position,pos);
 			double dis = dir.getLength();
