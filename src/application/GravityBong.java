@@ -28,7 +28,7 @@ public class GravityBong {
 
 	private void run() {
 		this.world.addObserver(gui);
-		this.gui.update(this.world, this.world.getEntities());
+		this.world.run();
 	}
 
 	private void readFromFile(String fileName){

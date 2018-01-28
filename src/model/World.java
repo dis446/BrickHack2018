@@ -232,8 +232,8 @@ public class World extends Observable{
         int count = 690;
         Random random = new Random();
         while(count>0){
-            world.addEntity(new Planet(new Vector(random.nextDouble()%world.maxX,random.nextDouble()%world.maxY),new Vector(),"kepler",random.nextLong()%300000+100000,3,Color.RED));
-            world.addEntity(new Ship(new Vector(random.nextDouble()%world.maxX,random.nextDouble()%world.maxY),new Vector(),"kepler",Color.RED));
+            world.addEntity(new Planet(new Vector(random.nextDouble()%world.maxX,random.nextDouble()%world.maxY),new Vector(),"kepler",random.nextLong()%300000+100000,3,Texture.RED));
+            world.addEntity(new Ship(new Vector(random.nextDouble()%world.maxX,random.nextDouble()%world.maxY),new Vector(),"kepler",Texture.RED));
             count--;
         }
 
