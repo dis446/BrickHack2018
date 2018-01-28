@@ -2,6 +2,7 @@ package model;
 
 
 import model.entities.Entity;
+import model.entities.Planet;
 
 import java.time.Instant;
 import java.util.*;
@@ -55,6 +56,14 @@ public class World extends Observable implements Observer{
 		return chunks[row][col];
 	}
 
+	public int getCols() {
+		return cols;
+	}
+
+	public int getRows() {
+		return rows;
+	}
+
 	public void moved(Entity e){
 		Vector pos = e.getPosition();
 		Vector vel = e.getVelocity();
@@ -75,6 +84,56 @@ public class World extends Observable implements Observer{
 			vel.setY(-vel.getX());
 		}
 
+		if(e instanceof Planet){
+			Planet p = (Planet) e;
+			removeInfluence(p,p.getSOI()+2 );
+		}
+		placeEntity(e);
+	}
+
+	public void removeInfluence(Planet p, int radius){
+		Vector pos = p.getPosition();
+		int row = (int) (pos.getY()/Chunk.side);
+		int col = (int) (pos.getX()/Chunk.side);
+		Queue<Vector> todo = new ArrayDeque<>();
+		Set<Vector> done = new HashSet<>();
+		todo.add(new Vector(row,col));
+		while(!todo.isEmpty()){
+			Vector v = todo.poll();
+			if(done.contains(v)){continue;}
+			int diff = (int) (Math.abs(v.x-row)+Math.abs(v.y-col));
+			chunks[(int)v.x][(int)v.y].removeInfluence(p);
+			if(diff<=radius) {
+				todo.add(Vector.add(v, new Vector(0, 1)));
+				todo.add(Vector.add(v, new Vector(0, -1)));
+				todo.add(Vector.add(v, new Vector(1, 0)));
+				todo.add(Vector.add(v, new Vector(-1, 0)));
+			}
+		}
+
+	}
+
+	public void addInfluence(Planet p, int radius){
+		Vector pos = p.getPosition();
+		int row = (int) (pos.getY()/Chunk.side);
+		int col = (int) (pos.getX()/Chunk.side);
+		Queue<Vector> todo = new ArrayDeque<>();
+		Set<Vector> done = new HashSet<>();
+		todo.add(new Vector(row,col));
+		while(!todo.isEmpty()){
+			Vector v = todo.poll();
+			if(done.contains(v) || v.x<0 || v.x>=rows || v.y<0 || v.y>=cols){
+				continue;
+			}
+			int diff = (int) (Math.abs(v.x-row)+Math.abs(v.y-col));
+			chunks[(int)v.x][(int)v.y].addInfluence(p);
+			if(diff<=radius) {
+				todo.add(Vector.add(v, new Vector(0, 1)));
+				todo.add(Vector.add(v, new Vector(0, -1)));
+				todo.add(Vector.add(v, new Vector(1, 0)));
+				todo.add(Vector.add(v, new Vector(-1, 0)));
+			}
+		}
 
 	}
 
@@ -83,6 +142,10 @@ public class World extends Observable implements Observer{
 		int i = (int)(pos.x/Chunk.side);
 		int j = (int)(pos.y/Chunk.side);
 		chunks[j][i].addEntity(e);
+		if(e instanceof Planet){
+			Planet p = (Planet) e;
+			addInfluence(p,p.getSOI());
+		}
 	}
 
 	public void step(){

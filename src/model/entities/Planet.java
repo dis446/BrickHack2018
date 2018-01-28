@@ -45,7 +45,7 @@ public class Planet extends Entity {
 		return mass;
 	}
 
-	public double getSOI() {
+	public int getSOI() {
 		return SOI;
 	}
 

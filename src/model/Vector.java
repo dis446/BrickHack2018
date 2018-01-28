@@ -80,6 +80,20 @@ public class Vector {
 	}
 
 	@Override
+	public boolean equals(Object o) {
+		if(o instanceof Vector){
+			Vector v = (Vector) o;
+			return v.x==x && v.y==y;
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return (int) (x+y);
+	}
+
+	@Override
 	public String toString() {
 		return "<"+x+" , "+y+">";
 	}
