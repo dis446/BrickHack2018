@@ -19,7 +19,6 @@ public class Ship extends Entity {
 				angle;
 	}
 
-
 	public int getSize() {
 		return 25;
 	}

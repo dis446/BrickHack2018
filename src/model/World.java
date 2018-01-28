@@ -238,7 +238,7 @@ public class World extends Observable{
             world.addEntity(new Ship(new Vector(random.nextDouble()%world.maxX,random.nextDouble()%world.maxY),new Vector(),"kepler",Texture.RED));
             count--;
         }
-
+        
 		int i = 0;
 		//System.out.println(world);
 		world.baseTime = Instant.now().toEpochMilli();

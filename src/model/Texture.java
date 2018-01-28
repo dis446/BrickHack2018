@@ -1,7 +1,7 @@
 package model;
 
 public enum Texture {
-	BLACK("BLACK") , RED("RED"), WHITE("WHITE"), BLUE("BLUE"), ORANGE("ORANGE");
+	BLACK("BLACK") , RED("RED"), WHITE("WHITE"), BLUE("BLUE"), ORANGE("ORANGE"), GREEN("GREEN");
 
 	private String label;
 
@@ -25,6 +25,8 @@ public enum Texture {
 				return BLUE;
 			case "ORANGE":
 				return ORANGE;
+			case "GREEN":
+				return GREEN;
 		}
 		throw new IllegalStateException("Error. Unknown color: " + s);
 	}
