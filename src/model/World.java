@@ -163,7 +163,7 @@ public class World extends Observable{
 				}
 				Vector left = Vector.add(v, new Vector(1, 0));
 				if(!done.contains(left) && inBounds(left)) {
-					todo.add(up);
+					todo.add(left);
 				}
 				Vector right = Vector.add(v, new Vector(-1, 0));
 				if(!done.contains(right) && inBounds(right)) {
