@@ -197,6 +197,7 @@ public class World extends Observable{
 				chunks[i][j].step(baseTime,nextTime);
 			}
 		}
+		setChanged();
 		notifyObservers(entities);
 	}
 

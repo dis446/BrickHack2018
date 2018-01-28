@@ -27,7 +27,6 @@ public class GravityBong {
 	}
 
 	private void run() {
-		this.world.addObserver(gui);
 		this.world.run();
 	}
 

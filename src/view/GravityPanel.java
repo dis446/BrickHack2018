@@ -10,8 +10,15 @@ import java.awt.*;
 
 public class GravityPanel extends JPanel {
 	private Iterable<Entity> entities;
+	private GravityUI ui;
 
-	public GravityPanel(){
+	double xScale;
+	double yScale;
+
+	public GravityPanel(GravityUI ui){
+		this.ui = ui;
+		this.xScale = ui.getXScale();
+		this.yScale = ui.getYScale();
 		this.setBackground(Color.BLACK);
 		this.setVisible(true);
 	}
@@ -27,17 +34,17 @@ public class GravityPanel extends JPanel {
 			switch (entity.getType()){
 				case SHIP:
 					Ship ship = (Ship) entity;
-					int size = ship.getSize();
-					startX = (int) (startPos.getX() - size);
-					startY = (int) (startPos.getY() - size);
-					g2.fillRect(startX, startY, size, size);
+					double size = ship.getSize();
+					startX = (int) ((startPos.getX() - size) * xScale);
+					startY = (int) ((startPos.getY() - size) * xScale);
+					g2.fillRect(startX, startY, (int)(size * xScale), (int)(size * xScale));
 					break;
 				case PLANET:
 					Planet planet= (Planet) entity;
-					int radius = (int) planet.getRadius();
-					startX = (int) (startPos.getX() - radius);
-					startY = (int) (startPos.getY() - radius);
-					g2.fillOval(startX, startY, radius * 2, radius * 2);
+					double radius = planet.getRadius();
+					startX = (int) ((startPos.getX() - radius) * xScale);
+					startY = (int) ((startPos.getY() - radius) * xScale);
+					g2.fillOval(startX, startY, (int)(radius * 2 * xScale), (int)(radius * 2 * xScale));
 					break;
 				case NONE:
 					break;
