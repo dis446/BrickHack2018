@@ -14,4 +14,7 @@ public class Ship extends Entity {
 	}
 
 
+	public int getSize() {
+		return 1; //TODO
+	}
 }
