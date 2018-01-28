@@ -207,6 +207,7 @@ public class World extends Observable{
 			nextTime = Instant.now().toEpochMilli();
 			step();
 			baseTime = nextTime;
+			//System.out.println(this);
 		}
 	}
 

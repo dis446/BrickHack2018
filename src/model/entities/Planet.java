@@ -3,7 +3,7 @@ package model.entities;
 import model.*;
 
 public class Planet extends Entity {
-	public static double minAcc = .05; //Minimum acceleration (m/s^2) considered significant
+	public static double minAcc = .01; //Minimum acceleration (m/s^2) considered significant
 
 	double mass;
 	double radius;
