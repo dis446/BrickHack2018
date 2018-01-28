@@ -11,17 +11,17 @@ import view.GravityUI;
 import java.io.*;
 import java.util.ArrayList;
 
-public class GravityBong {
+public class GravityBomb {
 
 	World world;
 	GravityUI gui;
 
-	public GravityBong(int length, int column) {
+	public GravityBomb(int length, int column) {
 		this.world = new World(length, column);
 		this.gui = new GravityUI(world);
 	}
 
-	public GravityBong(String fileName) {
+	public GravityBomb(String fileName) {
 		readFromFile(fileName);
 		this.gui = new GravityUI(this.world);
 	}
@@ -94,18 +94,18 @@ public class GravityBong {
 	}
 
 	public static void main(String[] args){
-		GravityBong gravityBong = null;
+		GravityBomb gravityBomb = null;
 		if (args.length == 1){
 			String fileName = args[0];
-			gravityBong = new GravityBong(fileName);
+			gravityBomb = new GravityBomb(fileName);
 		} else if (args.length == 2){
 			int length = Integer.parseInt(args[0]);
 			int width = Integer.parseInt(args[1]);
-			gravityBong = new GravityBong(length, width);
+			gravityBomb = new GravityBomb(length, width);
 		}else{
-			System.out.println("Error. Usage: java GravityBong length width or java GravityBong fileName");
+			System.out.println("Error. Usage: java GravityBomb length width or java GravityBomb fileName");
 			System.exit(0);
 		}
-		gravityBong.run();
+		gravityBomb.run();
 	}
 }

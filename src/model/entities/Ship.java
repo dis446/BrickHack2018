@@ -20,6 +20,6 @@ public class Ship extends Entity {
 	}
 
 	public int getSize() {
-		return 25;
+		return 10;
 	}
 }
