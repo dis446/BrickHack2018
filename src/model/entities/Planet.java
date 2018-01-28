@@ -35,6 +35,12 @@ public class Planet extends Entity {
 
 	public boolean canMove(){return canMove;}
 
+	@Override
+	public String toFileFormat() {
+		return "p,"+position.getX()+","+position.getY()+","+velocity.getX()+","+velocity.getY()+","+name+","+color+","
+				+mass+","+radius+","+canMove;
+	}
+
 	public double getMass() {
 		return mass;
 	}
@@ -46,4 +52,5 @@ public class Planet extends Entity {
 	public Equation getEq(){
 		return eq;
 	}
+
 }

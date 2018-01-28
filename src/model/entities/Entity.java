@@ -61,4 +61,6 @@ public abstract class Entity {
 		position.change(velocity);
 	}
 
+	public abstract String toFileFormat();
+
 }

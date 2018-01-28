@@ -13,6 +13,12 @@ public class Ship extends Entity {
 		type = EntityType.SHIP;
 	}
 
+	@Override
+	public String toFileFormat() {
+		return "s,"+position.getX()+","+position.getY()+","+velocity.getX()+","+velocity.getY()+","+name+","+color+","+
+				angle;
+	}
+
 
 	public int getSize() {
 		return 10;
