@@ -6,7 +6,7 @@ import model.entities.Planet;
 import java.time.Instant;
 import java.util.*;
 
-public class Chunk {
+public class Chunk extends Observable{
 	public static final double side = 1000; //10,000km
 
 	Set<Entity> entities;
@@ -48,7 +48,7 @@ public class Chunk {
 		return (pos.getX()>= xPos && pos.getY()>= yPos && pos.getX()<xPos+side && pos.getY()<yPos+side);
 	}
 
-	public void step(int baseTime){
+	public Iterable<Entity> step(long baseTime, long newTime){
 		for(Entity e: entities){
 			Vector acc = new Vector();
 			Vector pos = e.getPosition();
@@ -56,10 +56,11 @@ public class Chunk {
 				acc.change(p.getEq().evaluate(pos));
 			}
 			e.applyAcc(acc);
-			e.step((Instant.now().getNano()- baseTime)/1e9);
+			e.step((Math.min((newTime - baseTime),World.tickTime)/1e6));
 			if(!inBound(e)){
 				world.moved(e);
 			}
 		}
+		return entities;
 	}
 }
