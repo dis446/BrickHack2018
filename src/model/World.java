@@ -26,7 +26,7 @@ public class World extends Observable implements Observer{
 
 	public World(int rows, int cols){
 		this.chunks = new Chunk[rows][cols];
-		this.rows =rows;
+		this.rows = rows;
 		this.cols = cols;
 		maxX = rows*Chunk.side;
 		maxY = cols*Chunk.side;
@@ -53,6 +53,18 @@ public class World extends Observable implements Observer{
 
 	public Chunk getChunk(int row, int col){
 		return chunks[row][col];
+	}
+
+	public Set<Entity> getEntities() {
+		return entities;
+	}
+
+	public int getNumRows() {
+		return rows;
+	}
+
+	public int getNumCols() {
+		return cols;
 	}
 
 	public void moved(Entity e){
