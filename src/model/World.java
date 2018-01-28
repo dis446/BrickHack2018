@@ -81,16 +81,16 @@ public class World extends Observable{
 			pos.setX(0);
 			vel.setX(-vel.getX());
 		}
-		if(pos.getX()>maxX){
-			pos.setX(maxX);
+		if(pos.getX()>=maxX){
+			pos.setX(maxX-1);
 			vel.setX(-vel.getX());
 		}
 		if(pos.getY()<0){
 			pos.setY(0);
 			vel.setY(-vel.getX());
 		}
-		if(pos.getY()>maxY){
-			pos.setY(maxY);
+		if(pos.getY()>=maxY){
+			pos.setY(maxY-1);
 			vel.setY(-vel.getX());
 		}
 
@@ -228,19 +228,32 @@ public class World extends Observable{
 	}
 
 	public static void main(String[] args){
-		World world = new World(2,2);
+	    ///Current config is when my computer reaches ~20 ticks/s
+		World world = new World(50,50);
 		world.baseTime = 0;
 		world.nextTime = 50;
 		//world.addEntity(new Ship(new Vector(990,990),new Vector(1000,0),"bbygurl",Color.RED));
-		world.addEntity(new Planet(new Vector(1500,1500),new Vector(),"kepler",50000000,3,Color.RED));
-		world.addEntity(new Planet(new Vector(500,500),new Vector(),"kepler2",50000000,3,Color.RED));
+        int count = 690;
+        Random random = new Random();
+        while(count>0){
+            world.addEntity(new Planet(new Vector(random.nextDouble()%world.maxX,random.nextDouble()%world.maxY),new Vector(),"kepler",random.nextLong()%300000+100000,3,Color.RED));
+            world.addEntity(new Ship(new Vector(random.nextDouble()%world.maxX,random.nextDouble()%world.maxY),new Vector(),"kepler",Color.RED));
+            count--;
+        }
 
 		int i = 0;
-		System.out.println(world);
-		while(i<10){
+		//System.out.println(world);
+		world.baseTime = Instant.now().toEpochMilli();
+		long start = Instant.now().getEpochSecond();
+		while(Instant.now().getEpochSecond() - start <10){
+			world.nextTime = Instant.now().toEpochMilli();
 			world.step();
-			System.out.println(world);
+			world.baseTime = world.nextTime;
+
+			//System.out.println(world);
 			i++;
 		}
+		//System.out.println(world);
+		System.out.println(i);
 	}
 }

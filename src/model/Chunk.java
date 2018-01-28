@@ -45,7 +45,7 @@ public class Chunk extends Observable{
 
 	public boolean inBound(Entity e){
 		Vector pos = e.getPosition();
-		return (pos.getX()>= xPos && pos.getY()>= yPos && pos.getX()<=xPos+side && pos.getY()<=yPos+side);
+		return (pos.getX()>= xPos && pos.getY()>= yPos && pos.getX()<xPos+side && pos.getY()<yPos+side);
 	}
 
 	public void step(long baseTime, long newTime){
