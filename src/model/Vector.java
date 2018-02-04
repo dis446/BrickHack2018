@@ -1,6 +1,5 @@
 package model;
 
-import java.util.Iterator;
 
 public class Vector {
 	double x;
