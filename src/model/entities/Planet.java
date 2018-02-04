@@ -24,7 +24,7 @@ public class Planet extends Entity {
 			if(dis == 0){
 				return new Vector();
 			}
-			dir = dir.getUnit();
+			dir = dir.getUnitVector();
 			return Vector.scalar(World.bigG*mass*World.massUnit/(dis*dis),dir);
 		};
 	}
